@@ -3,11 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Stackr — CEN 4020 Software Engineering final-exam flashcards (Vite + React).",
+  "description": "Stackr — CEN 4020 Software Engineering final-exam flashcards (Vite + React + TypeScript).",
   "scripts": {
     "dev": "vite",
-    "build": "npm run parse && vite build",
+    "build": "bun run parse && bun run typecheck && vite build",
     "parse": "python3 scripts/parse_decks.py",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -15,7 +18,17 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
-    "vite": "^5.4.0"
+    "@eslint/js": "^9.13.0",
+    "@types/node": "^20.16.10",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.11.0",
+    "vite": "^5.4.10"
   }
 }
