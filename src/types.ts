@@ -61,7 +61,8 @@ export interface HeatmapResult {
 export type Route =
   | { name: 'home' }
   | { name: 'study'; deckId: string | null }
-  | { name: 'dash' };
+  | { name: 'dash' }
+  | { name: 'docs' };
 
 export type SessionCard = Card & { _deck: string; _idx: number };
 

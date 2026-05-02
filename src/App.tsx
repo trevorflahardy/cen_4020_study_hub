@@ -2,6 +2,7 @@ import { useEffect, useState, type JSX } from 'react';
 import HomeScreen from './components/Home';
 import StudyScreen from './components/Study';
 import DashboardScreen from './components/Dashboard';
+import DocsScreen from './docs/DocsScreen';
 import { getStreak } from './lib/progress';
 import { type Deck, type Route, type StreakState } from './types';
 
@@ -21,6 +22,12 @@ export default function App(): JSX.Element {
   };
   const goDash = (): void => {
     setRoute({ name: 'dash' });
+  };
+  const goDocs = (): void => {
+    setRoute({ name: 'docs' });
+  };
+  const goStudyById = (deckId: string): void => {
+    setRoute({ name: 'study', deckId });
   };
 
   return (
@@ -67,6 +74,12 @@ export default function App(): JSX.Element {
             Study
           </button>
           <button
+            className={`nav-link ${route.name === 'docs' ? 'is-active' : ''}`}
+            onClick={goDocs}
+          >
+            Docs
+          </button>
+          <button
             className={`nav-link ${route.name === 'dash' ? 'is-active' : ''}`}
             onClick={goDash}
           >
@@ -84,6 +97,7 @@ export default function App(): JSX.Element {
 
       {route.name === 'home' && <HomeScreen onPickTopic={goStudy} />}
       {route.name === 'study' && <StudyScreen deckId={route.deckId} onExit={goHome} />}
+      {route.name === 'docs' && <DocsScreen onOpenDeck={goStudyById} />}
       {route.name === 'dash' && <DashboardScreen />}
     </div>
   );
