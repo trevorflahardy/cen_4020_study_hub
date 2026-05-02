@@ -5,6 +5,7 @@ CEN 4020 Software Engineering final exam. Built from the source markdown decks
 in `flashcards/`, deployed to GitHub Pages on every push to `master`.
 
 <img width="1143" height="742" alt="image" src="https://github.com/user-attachments/assets/f806cb0a-1f64-4aae-9b5c-2b2c737720dd" />
+<img width="1169" height="758" alt="image" src="https://github.com/user-attachments/assets/24b24ef4-4635-4abd-bdea-6a9cb07f21a9" />
 
 ## Quick start
 
