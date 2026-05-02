@@ -9,25 +9,45 @@ import { type Deck, type Route, type StreakState } from './types';
 export default function App(): JSX.Element {
   const [route, setRoute] = useState<Route>({ name: 'home' });
   const [streak, setStreak] = useState<StreakState>(() => getStreak());
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (route.name !== 'study') setStreak(getStreak());
   }, [route.name]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [menuOpen]);
+
+  const closeMenu = (): void => {
+    setMenuOpen(false);
+  };
   const goHome = (): void => {
     setRoute({ name: 'home' });
+    closeMenu();
   };
   const goStudy = (deck: Deck | null): void => {
     setRoute({ name: 'study', deckId: deck?.id ?? null });
+    closeMenu();
   };
   const goDash = (): void => {
     setRoute({ name: 'dash' });
+    closeMenu();
   };
   const goDocs = (): void => {
     setRoute({ name: 'docs' });
+    closeMenu();
   };
   const goStudyById = (deckId: string): void => {
     setRoute({ name: 'study', deckId });
+    closeMenu();
   };
 
   return (
@@ -93,7 +113,68 @@ export default function App(): JSX.Element {
         <div className="avatar" title="Trev">
           T
         </div>
+        <button
+          type="button"
+          className={`nav-burger ${menuOpen ? 'is-open' : ''}`}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-nav-menu"
+          onClick={() => {
+            setMenuOpen((v) => !v);
+          }}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </nav>
+
+      {menuOpen && (
+        <>
+          <div
+            className="nav-menu-backdrop"
+            onClick={closeMenu}
+            aria-hidden="true"
+          />
+          <div
+            id="mobile-nav-menu"
+            className="nav-menu"
+            role="menu"
+            aria-label="Primary navigation"
+          >
+            <button
+              role="menuitem"
+              className={`nav-menu-item ${route.name === 'home' ? 'is-active' : ''}`}
+              onClick={goHome}
+            >
+              Topics
+            </button>
+            <button
+              role="menuitem"
+              className={`nav-menu-item ${route.name === 'study' ? 'is-active' : ''}`}
+              onClick={() => {
+                goStudy(null);
+              }}
+            >
+              Study
+            </button>
+            <button
+              role="menuitem"
+              className={`nav-menu-item ${route.name === 'docs' ? 'is-active' : ''}`}
+              onClick={goDocs}
+            >
+              Docs
+            </button>
+            <button
+              role="menuitem"
+              className={`nav-menu-item ${route.name === 'dash' ? 'is-active' : ''}`}
+              onClick={goDash}
+            >
+              Progress
+            </button>
+          </div>
+        </>
+      )}
 
       {route.name === 'home' && <HomeScreen onPickTopic={goStudy} />}
       {route.name === 'study' && <StudyScreen deckId={route.deckId} onExit={goHome} />}
