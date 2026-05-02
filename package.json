@@ -1,0 +1,21 @@
+{
+  "name": "cen-4020-final-flashcards",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Stackr — CEN 4020 Software Engineering final-exam flashcards (Vite + React).",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run parse && vite build",
+    "parse": "python3 scripts/parse_decks.py",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.0"
+  }
+}

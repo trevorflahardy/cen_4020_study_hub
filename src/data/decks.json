@@ -1,0 +1,1789 @@
+[
+  {
+    "id": "foundations",
+    "name": "SE Foundations",
+    "short": "What software engineering really is",
+    "emoji": "\ud83e\uddf1",
+    "color": "#FFE0E0",
+    "accent": "#E0383A",
+    "glyph": "star",
+    "cards": [
+      {
+        "kind": "flip",
+        "front": "What is software engineering, in the framing used in this course?",
+        "back": "Software engineering is **programming integrated over time** \u2014 it encompasses not just the act of writing code, but **all of the tools and processes an organization uses to build and maintain that code over time**.",
+        "tag": ""
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Software engineering is more than coding because it must keep code _______ over its life cycle.",
+        "back": "**sustainable** \u2014 able to react to necessary change from conception through introduction, maintenance, and deprecation.",
+        "tag": ""
+      },
+      {
+        "kind": "flip",
+        "front": "Name the four life-cycle phases mentioned in the definition of \"sustainable\" software.",
+        "back": "**Conception \u2192 Introduction \u2192 Maintenance \u2192 Deprecation.**",
+        "tag": ""
+      },
+      {
+        "kind": "flip",
+        "front": "What is the difference between programming and software engineering?",
+        "back": "**Programming** is the act of writing code (a one-time creation activity). **Software engineering** is programming **integrated over time** \u2014 it adds the discipline, tools, and processes needed to keep that code valuable, correct, and changeable for years.",
+        "tag": ""
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which of the following are concerns of software engineering, but not of programming alone?",
+        "options": [
+          "Choosing a variable name",
+          "Keeping code valuable over the long term",
+          "Designing for predictable change",
+          "Hitting Enter at the end of a line",
+          "Making the discipline itself more rigorous"
+        ],
+        "answer": [
+          1,
+          2,
+          4
+        ],
+        "multi": true,
+        "explain": "A and D are pure coding concerns; software engineering layers organizational discipline and longevity on top.",
+        "tag": ""
+      },
+      {
+        "kind": "flip",
+        "front": "What three guiding questions does Lesson 30 frame around the definition of software engineering?",
+        "back": "1. What practices keep code valuable over the long term?\n2. How can engineers make a codebase more sustainable and the discipline itself more rigorous?\n3. What practices make code able to react to necessary change throughout its life cycle?",
+        "tag": ""
+      },
+      {
+        "kind": "flip",
+        "front": "What six topic areas does the **final exam cover**?",
+        "back": "1. Software Construction\n2. Software Testing\n3. Software Maintenance\n4. Software Configuration Management\n5. Software Engineering Management\n6. Software Quality",
+        "tag": ""
+      }
+    ]
+  },
+  {
+    "id": "testing",
+    "name": "Software Testing",
+    "short": "TDD, pyramid, V&V, black/white box",
+    "emoji": "\ud83e\uddea",
+    "color": "#D7F7E1",
+    "accent": "#1FA85A",
+    "glyph": "flask",
+    "cards": [
+      {
+        "kind": "flip",
+        "front": "Define software testing (the course's \"definition of done\" for testing).",
+        "back": "Software testing is the **dynamic verification that a program provides expected behaviors on a finite set of test cases**.",
+        "tag": "Section A \u2014 What Testing Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Identify and explain the four key terms in the definition of software testing.",
+        "back": "- **Dynamic** \u2014 the code is actually executed (not just inspected).\n- **Expected** \u2014 every test compares observed output to a known correct answer.\n- **Finite** \u2014 exhaustive testing is impossible, so we choose a sample.\n- **Verification** \u2014 we are checking conformance to specifications.",
+        "tag": "Section A \u2014 What Testing Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Why can we not test every possible input?",
+        "back": "The space of possible inputs is effectively infinite. Our challenge is to **intelligently select a subset of tests that represent the highest risks and most common uses.**",
+        "tag": "Section A \u2014 What Testing Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Our tests are useless unless we know what _______ looks like.",
+        "back": "**\"correct\"** \u2014 we must check the software's output against the specifications/requirements before we can claim it passed.",
+        "tag": "Section A \u2014 What Testing Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Why must a tester execute the software, not just read it?",
+        "back": "Bugs only manifest at runtime under real inputs and system states. Reading code can find some defects, but **dynamic verification** is needed to see how the software actually behaves.",
+        "tag": "Section A \u2014 What Testing Is"
+      },
+      {
+        "kind": "flip",
+        "front": "What is Test-Driven Development (TDD)? Other name?",
+        "back": "Also called **Test-First Programming**. It is a development style where **test cases are written *before* the implementation code**.",
+        "tag": "Section B \u2014 Test-Driven Development (TDD)"
+      },
+      {
+        "kind": "flip",
+        "front": "What are the three steps of the TDD process?",
+        "back": "1. **Write a failing test** for a new feature (it must fail initially).\n2. **Write the minimum code** necessary to make the test pass.\n3. **Refactor** the code to meet quality standards, ensuring the test still passes.",
+        "tag": "Section B \u2014 Test-Driven Development (TDD)"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the TDD rhythm called?",
+        "back": "**Red \u2192 Green \u2192 Refactor.**\n- **Red:** write a failing test (proves the test works and defines what to build).\n- **Green:** write the absolute minimum production code to pass.\n- **Refactor:** clean up the code while staying green.",
+        "tag": "Section B \u2014 Test-Driven Development (TDD)"
+      },
+      {
+        "kind": "flip",
+        "front": "Why does TDD start with a *failing* test (the \"Red\" step)?",
+        "back": "A failing test proves the test is actually exercising the new behavior. If it passed before any code was written, the test would be meaningless.",
+        "tag": "Section B \u2014 Test-Driven Development (TDD)"
+      },
+      {
+        "kind": "flip",
+        "front": "Name three advantages of TDD.",
+        "back": "1. **Detects defects sooner** (smaller increments mean smaller debug surface).\n2. **Forces critical thinking upfront** \u2014 writing the test first forces designers to clarify requirements.\n3. **Creates a safety net** \u2014 the suite of tests acts as regression protection when refactoring or adding features.",
+        "tag": "Section B \u2014 Test-Driven Development (TDD)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is true about TDD?",
+        "options": [
+          "You write all tests after the code is finished.",
+          "You write the test first, then write minimum code to pass it, then refactor.",
+          "You don't refactor \u2014 refactoring breaks tests.",
+          "The first run of a TDD test should always pass."
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section B \u2014 Test-Driven Development (TDD)"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the four levels of the testing pyramid, from bottom to top.",
+        "back": "**Unit \u2192 Integration \u2192 System \u2192 Acceptance.**",
+        "tag": "Section C \u2014 The Testing Pyramid (Levels of Testing)"
+      },
+      {
+        "kind": "flip",
+        "front": "What does the **base** of the testing pyramid contain, and why is it the largest layer?",
+        "back": "**Unit tests.** They are **many, very fast, and cheap** \u2014 testing individual functions/classes in isolation. They form the foundation because confidence is built from the ground up.",
+        "tag": "Section C \u2014 The Testing Pyramid (Levels of Testing)"
+      },
+      {
+        "kind": "flip",
+        "front": "What does the **top** of the testing pyramid contain, and why is it the smallest layer?",
+        "back": "**Acceptance tests** \u2014 confirming the system meets the customer's needs. They are few because they're slow, expensive, and validate end-user value rather than internal correctness.",
+        "tag": "Section C \u2014 The Testing Pyramid (Levels of Testing)"
+      },
+      {
+        "kind": "flip",
+        "front": "Match each level to its purpose: Unit / Integration / System / Acceptance.",
+        "back": "- **Unit** \u2014 verifies the smallest pieces of code (a single function, method, or class).\n- **Integration** \u2014 ensures pieces work *together* (testing connections between modules).\n- **System** \u2014 validates the complete, fully assembled software.\n- **Acceptance** \u2014 confirms the system meets the customer's needs/requirements.",
+        "tag": "Section C \u2014 The Testing Pyramid (Levels of Testing)"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Each level of the testing pyramid validates the one _______ it.",
+        "back": "**below** \u2014 confidence builds from the ground up; you cannot have a meaningful system test if the units are broken.",
+        "tag": "Section C \u2014 The Testing Pyramid (Levels of Testing)"
+      },
+      {
+        "kind": "flip",
+        "front": "What is a \"balanced\" test pyramid strategy?",
+        "back": "**Lots** of small, fast unit tests; **some** integration tests for critical interactions; **a few** high-value, end-to-end system tests to simulate real user workflows. Many fast cheap tests at the bottom, few slow expensive ones at the top.",
+        "tag": "Section C \u2014 The Testing Pyramid (Levels of Testing)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) The Testing Pyramid says that as you climb levels, tests become:",
+        "options": [
+          "Faster",
+          "Slower",
+          "Cheaper",
+          "More expensive",
+          "Fewer in number",
+          "More numerous"
+        ],
+        "answer": [
+          1,
+          3,
+          4
+        ],
+        "multi": true,
+        "explain": "Higher-level tests are slower, more expensive, and fewer.",
+        "tag": "Section C \u2014 The Testing Pyramid (Levels of Testing)"
+      },
+      {
+        "kind": "flip",
+        "front": "What does a unit test focus on?",
+        "back": "A **single, isolated component** \u2014 one function, one method, or one class \u2014 verifying it does **one thing correctly**.",
+        "tag": "Section D \u2014 Unit Testing in Detail"
+      },
+      {
+        "kind": "flip",
+        "front": "Name three distinct advantages of unit testing.",
+        "back": "1. **Fast** \u2014 single unit tests execute in milliseconds, allowing thousands to run quickly.\n2. **Easy to control** \u2014 you can pass specific inputs and verify exact outputs.\n3. **Easy to write** \u2014 units are small and cohesive, requiring minimal setup.",
+        "tag": "Section D \u2014 Unit Testing in Detail"
+      },
+      {
+        "kind": "flip",
+        "front": "Give three example unit-test questions for the IQon Elite system.",
+        "back": "- Does `calculateTissueDensity()` return the correct value for a given input?\n- Does `savePatientRecord()` correctly write data to the database without corruption?\n- Does `renderScanSlice()` handle a missing data point without crashing?",
+        "tag": "Section D \u2014 Unit Testing in Detail"
+      },
+      {
+        "kind": "flip",
+        "front": "What does integration testing answer?",
+        "back": "**\"Do the pieces fit together?\"** \u2014 it tests the **connections between units** (data flow, contracts, shared state).",
+        "tag": "Section E \u2014 Integration & System Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "What does system testing evaluate, and from whose perspective?",
+        "back": "System testing evaluates the **complete, fully integrated software system** \u2014 running all components together (databases, front-end apps, services). It is done from the **user's perspective** as a black-box test.",
+        "tag": "Section E \u2014 Integration & System Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "What are the three core principles of the Black-Box approach used in system testing?",
+        "back": "1. We do **not** care **how** the system works on the inside.\n2. We do **not** care **what language** it's written in or what database it uses.\n3. We **only** care that, given input X, the system produces the correct output Y.",
+        "tag": "Section E \u2014 Integration & System Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the home/architect analogy for system testing?",
+        "back": "We are not the **architect** checking the blueprints \u2014 we are the **homebuyer** checking that the lights turn on and the water runs.",
+        "tag": "Section E \u2014 Integration & System Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "Define **Black-Box testing**.",
+        "back": "Testing the **outside** \u2014 we look only at inputs and outputs, ignoring the internal code. We test against the **specification**.",
+        "tag": "Section F \u2014 Black-Box vs. White-Box Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "Define **White-Box testing**.",
+        "back": "Testing the **inside** \u2014 we use our knowledge of the code's internal structure and logic to design tests (e.g., covering every branch).",
+        "tag": "Section F \u2014 Black-Box vs. White-Box Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "Give a black-box example for an \"Apply Filter\" button.",
+        "back": "Does the \"Apply Filter\" button produce the correctly filtered image, as described in the user manual?",
+        "tag": "Section F \u2014 Black-Box vs. White-Box Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "Give a white-box example for a filtering algorithm.",
+        "back": "Have we written tests that ensure every `if/else` branch within the filtering algorithm is executed?",
+        "tag": "Section F \u2014 Black-Box vs. White-Box Testing"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which testing type ignores the source code and tests only against the specification?",
+        "options": [
+          "White-box",
+          "Black-box",
+          "Glass-box",
+          "Structural"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section F \u2014 Black-Box vs. White-Box Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "What does the principle \"Designing for Testability\" mean?",
+        "back": "**Testability is not an accident or afterthought.** It is a fundamental design principle: code should be **architected from the start** so that it is easy to write automated tests for.",
+        "tag": "Section G \u2014 Designing for Testability"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: If our code is hard to test, we probably _______.",
+        "back": "**won't test it.**",
+        "tag": "Section G \u2014 Designing for Testability"
+      },
+      {
+        "kind": "flip",
+        "front": "When is the right time to think about testability?",
+        "back": "- **Before** you write the first line of production code.\n- **While** you are writing the code.\n- **After** the feature is \"done.\"\n- **The answer: All the time.** Testability is a continuous design principle.",
+        "tag": "Section G \u2014 Designing for Testability"
+      },
+      {
+        "kind": "flip",
+        "front": "Is testable code a \"cost\" or an \"investment\"? Why?",
+        "back": "It is an **investment**. Testable code does cost more upfront, but it is the **only way to ensure sustainable quality and long-term development speed.** Spaghetti code has a low initial cost but enormous payoff debt.",
+        "tag": "Section G \u2014 Designing for Testability"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) When is the wrong time to think about designing for testability?",
+        "options": [
+          "Before writing code",
+          "While writing code",
+          "After the feature is \"done\"",
+          "None of the above \u2014 you should think about it at every stage"
+        ],
+        "answer": 3,
+        "multi": false,
+        "explain": "Testability is a continuous concern.",
+        "tag": "Section G \u2014 Designing for Testability"
+      },
+      {
+        "kind": "flip",
+        "front": "List the **five steps** of the testing development workflow (developer's journey from requirement to reliable code).",
+        "back": "1. **Requirement Analysis** \u2014 understand the feature request.\n2. **Test-Driven Development (TDD)** \u2014 write small tests for each unit before code.\n3. **Design for Testability** \u2014 build units that are easy to isolate and test from the start.\n4. **Systematic Testing** \u2014 apply rigorous testing (boundary, structural) at unit, integration, and system levels.\n5. **Confident Release** \u2014 release the feature to the customer after comprehensive testing.",
+        "tag": "Section H \u2014 Developer's Journey From Requirement to Reliable Code"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: This process creates individual software units and an automated _______, ensuring quality is built in, not bolted on.",
+        "back": "**test suite.**",
+        "tag": "Section H \u2014 Developer's Journey From Requirement to Reliable Code"
+      },
+      {
+        "kind": "flip",
+        "front": "What is regression testing, and when do you do it?",
+        "back": "Regression testing is **re-running tests after a change** to ensure the change didn't unintentionally break previously working features. You do it **after every fix or new feature** before release.",
+        "tag": "Section I \u2014 Regression Testing"
+      },
+      {
+        "kind": "flip",
+        "front": "Name three reasons regression testing is hard (\"the testing gauntlet\").",
+        "back": "1. **Cost** \u2014 repeating full testing takes significant time and money.\n2. **Coordination** \u2014 other engineers may be working on the same code at the same time.\n3. **Access** \u2014 production systems can't always be brought offline for tests.",
+        "tag": "Section I \u2014 Regression Testing"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which are true of unit tests?",
+        "options": [
+          "They are fast.",
+          "They test isolated components.",
+          "They simulate real end-to-end user workflows.",
+          "They make up the largest layer of the test pyramid.",
+          "They are slow and expensive."
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section J \u2014 Catch-All Testing MCQs"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which list of testing levels is in correct **bottom-to-top** pyramid order?",
+        "options": [
+          "Acceptance, System, Integration, Unit",
+          "Unit, System, Integration, Acceptance",
+          "Unit, Integration, System, Acceptance",
+          "System, Integration, Acceptance, Unit"
+        ],
+        "answer": 2,
+        "multi": false,
+        "explain": "",
+        "tag": "Section J \u2014 Catch-All Testing MCQs"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) The TDD cycle is best described as:",
+        "options": [
+          "Write code \u2192 Test \u2192 Document",
+          "Test \u2192 Code \u2192 Refactor (Red \u2192 Green \u2192 Refactor)",
+          "Refactor \u2192 Test \u2192 Code",
+          "Design \u2192 Code \u2192 Test"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section J \u2014 Catch-All Testing MCQs"
+      }
+    ]
+  },
+  {
+    "id": "dbc",
+    "name": "Design by Contract",
+    "short": "Pre/post-conditions, invariants",
+    "emoji": "\ud83d\udcdc",
+    "color": "#FFE9C7",
+    "accent": "#E07A1F",
+    "glyph": "list",
+    "cards": [
+      {
+        "kind": "flip",
+        "front": "What is **Design by Contract (DbC)**?",
+        "back": "A methodology that **formally defines the rights and obligations of software components**. It creates a **clear, enforceable agreement** between caller (Client) and called code (Server) that prevents unspecified-assumption errors.",
+        "tag": "Section A \u2014 The Core Idea"
+      },
+      {
+        "kind": "flip",
+        "front": "What problem does Design by Contract solve?",
+        "back": "It **replaces unspoken assumptions** between modules with an **explicit, formal contract** so callers know exactly what they must provide and callees know exactly what they must guarantee.",
+        "tag": "Section A \u2014 The Core Idea"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **two parties** in a contract and what each owes.",
+        "back": "- **Client (caller)** \u2014 owes the **pre-conditions**: must guarantee certain inputs/state are valid before calling.\n- **Server (callee)** \u2014 owes the **post-conditions**: must guarantee a valid result after the call.",
+        "tag": "Section A \u2014 The Core Idea"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **three clauses** in a Design-by-Contract specification.",
+        "back": "1. **Pre-conditions** \u2014 what the Client must guarantee *before* the call.\n2. **Post-conditions** \u2014 what the Server promises *after* a successful call.\n3. **Invariants** \u2014 universal rules that must hold *throughout* the object's lifetime.",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "What is a **pre-condition**? Whose responsibility is it?",
+        "back": "A pre-condition is a condition the **Client** must guarantee to be **true *before* calling a method**. It is the **client's responsibility** to meet these requirements.",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "Example: For `addItem(Item item, int quantity)`, what could the pre-condition be?",
+        "back": "The `quantity` provided must be a positive number \u2014 `require(quantity > 0);`",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: If a pre-condition is violated, the fault lies squarely with the _______.",
+        "back": "**Client.** The Server is **not obligated to proceed**.",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "What is a **post-condition**? Whose responsibility is it?",
+        "back": "A condition the **Server** guarantees will be **true *after* the method has finished executing successfully**. It is the Server's promise to the Client.",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "Example post-conditions for `addItem`?",
+        "back": "- `ensure(itemCount == old.itemCount + quantity);`\n- `ensure(totalPrice > old.totalPrice);`",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: If pre-conditions are met but post-conditions fail, the bug is inside the _______.",
+        "back": "**Server method.** The Client did its part; the Server failed to deliver on its promise.",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "What is an **invariant**?",
+        "back": "An invariant is a condition that **must hold true for an object throughout its entire lifetime**. It must be true **before and after every public method is called.** The Server is responsible for maintaining its own invariants.",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "Example invariant for an `OnlineShoppingCart`?",
+        "back": "- `invariant(totalPrice >= 0);`\n- `invariant(itemCount >= 0);`\n\nThe total price and item count can never go negative.",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Invariants define what it means for an object to be in a _______ state at all times.",
+        "back": "**'sane' or 'valid'** state.",
+        "tag": "Section B \u2014 The Three Clauses"
+      },
+      {
+        "kind": "flip",
+        "front": "A method's pre-conditions were violated. Who is at fault?",
+        "back": "The **Client** (caller). The Server is not obligated to do anything correct.",
+        "tag": "Section C \u2014 Reasoning About Faults"
+      },
+      {
+        "kind": "flip",
+        "front": "A method's pre-conditions were satisfied but its post-conditions failed. Who is at fault?",
+        "back": "The **Server** (the called method) \u2014 the bug is inside the Server's implementation.",
+        "tag": "Section C \u2014 Reasoning About Faults"
+      },
+      {
+        "kind": "flip",
+        "front": "An object is observed in a state that violates its invariant. Who/what is at fault?",
+        "back": "The **Server** \u2014 it failed to maintain its own invariants. Some method exposed an internal inconsistency.",
+        "tag": "Section C \u2014 Reasoning About Faults"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which DbC clause is the *Client's* responsibility?",
+        "options": [
+          "Pre-conditions",
+          "Post-conditions",
+          "Invariants",
+          "Exceptions"
+        ],
+        "answer": 0,
+        "multi": false,
+        "explain": "",
+        "tag": "Section D \u2014 Application & MCQs"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which DbC clauses are the *Server's* responsibility? (select all that apply)",
+        "options": [
+          "Pre-conditions",
+          "Post-conditions",
+          "Invariants",
+          "Method signatures"
+        ],
+        "answer": [
+          1,
+          2
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section D \u2014 Application & MCQs"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) An invariant must hold:",
+        "options": [
+          "Only before a method is called",
+          "Only after a method finishes",
+          "Both before and after every public method call (i.e., always)",
+          "Only at object creation"
+        ],
+        "answer": 2,
+        "multi": false,
+        "explain": "",
+        "tag": "Section D \u2014 Application & MCQs"
+      },
+      {
+        "kind": "flip",
+        "front": "(Scenario) A bank-account `withdraw(amount)` method has `require(amount <= balance)`. A caller invokes `account.withdraw(1000)` when the balance is 500 and the program crashes. Who is at fault?",
+        "back": "The **Client** \u2014 they violated the pre-condition. The Server is not obligated to handle that case correctly.",
+        "tag": "Section D \u2014 Application & MCQs"
+      },
+      {
+        "kind": "flip",
+        "front": "(Scenario) Same `withdraw` method, but the caller passes a valid `amount`. After the call, the balance is unchanged. Who is at fault?",
+        "back": "The **Server** \u2014 pre-conditions were met, but the post-condition (balance reduced by `amount`) failed. The bug is inside `withdraw`.",
+        "tag": "Section D \u2014 Application & MCQs"
+      },
+      {
+        "kind": "flip",
+        "front": "Why is DbC valuable for testing?",
+        "back": "Because pre/post-conditions and invariants are **executable assertions** \u2014 they catch contract violations the moment they occur, making bugs easier to localize and giving us a precise definition of \"correct.\"",
+        "tag": "Section D \u2014 Application & MCQs"
+      }
+    ]
+  },
+  {
+    "id": "maintenance",
+    "name": "Software Maintenance",
+    "short": "Evolution, refactoring, reverse engineering",
+    "emoji": "\ud83d\udd27",
+    "color": "#FFD6E8",
+    "accent": "#E0388E",
+    "glyph": "sprint",
+    "cards": [
+      {
+        "kind": "flip",
+        "front": "Define **software maintenance**.",
+        "back": "Software maintenance is **the totality of activities required to provide cost-effective support to software** \u2014 modifying it after delivery to correct faults, improve performance, or adapt to a changed environment.",
+        "tag": "Section A \u2014 What Maintenance Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Software maintenance isn't an afterthought \u2014 it's the **ongoing _______** of a live product.",
+        "back": "**stewardship.**",
+        "tag": "Section A \u2014 What Maintenance Is"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the \"Big Idea\" about software maintenance?",
+        "back": "Your job as a software engineer **doesn't end at launch \u2014 that's when it truly begins.** You aren't just fixing the past; you are actively building the future of the software.",
+        "tag": "Section A \u2014 What Maintenance Is"
+      },
+      {
+        "kind": "flip",
+        "front": "What four-stage breakdown is used to organize maintenance content?",
+        "back": "1. Fundamentals\n2. Key Issues\n3. Maintenance Process\n4. Techniques For Maintenance\n5. Maintenance Tools\n(Five categories on the maintenance overview ribbon.)",
+        "tag": "Section A \u2014 What Maintenance Is"
+      },
+      {
+        "kind": "flip",
+        "front": "What percentage of software maintenance effort is spent on **non-corrective** actions?",
+        "back": "**Over 80%** \u2014 meaning maintenance is mostly **evolution, not repair.** Most time is spent on enhancements and adaptations rather than bug fixes.",
+        "tag": "Section A \u2014 What Maintenance Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **four flavors of maintenance work**.",
+        "back": "1. **Corrective** \u2014 fixing faults / classic \"bug hunt.\"\n2. **Adaptive** \u2014 adapting the software to a changed environment (new OS, new browser, new third-party API).\n3. **Perfective** \u2014 implementing enhancements and new features based on user feedback.\n4. **Preventive** \u2014 improving the design to make the system more reliable and maintainable in the future (\"paying down technical debt\").",
+        "tag": "Section B \u2014 The Four Flavors of Maintenance Work"
+      },
+      {
+        "kind": "flip",
+        "front": "Match the maintenance flavor to its description.\n1. Corrective    a. Adapt to a new browser version or OS\n2. Adaptive      b. Add a new feature requested by a user\n3. Perfective    c. Pay down technical debt to prevent future failure\n4. Preventive    d. Diagnose and resolve a bug reported by QA",
+        "back": "1\u2192d, 2\u2192a, 3\u2192b, 4\u2192c.",
+        "tag": "Section B \u2014 The Four Flavors of Maintenance Work"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Refactoring a tangled module so it will be easier to extend in the future is which kind of maintenance?",
+        "options": [
+          "Corrective",
+          "Adaptive",
+          "Perfective",
+          "Preventive"
+        ],
+        "answer": 3,
+        "multi": false,
+        "explain": "",
+        "tag": "Section B \u2014 The Four Flavors of Maintenance Work"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Updating your code so it works with a new third-party API is which kind of maintenance?",
+        "options": [
+          "Corrective",
+          "Adaptive",
+          "Perfective",
+          "Preventive"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section B \u2014 The Four Flavors of Maintenance Work"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which kinds of maintenance do **not** involve fixing a bug?",
+        "options": [
+          "Corrective",
+          "Adaptive",
+          "Perfective",
+          "Preventive"
+        ],
+        "answer": [
+          1,
+          2,
+          3
+        ],
+        "multi": true,
+        "explain": "\u2014 only **Corrective** is the \"bug fix\" flavor.",
+        "tag": "Section B \u2014 The Four Flavors of Maintenance Work"
+      },
+      {
+        "kind": "flip",
+        "front": "What is **maintainability**?",
+        "back": "Maintainability is **the capability of software to be modified.** Ideally this is built in from the start; in reality, it's often an afterthought.",
+        "tag": "Section C \u2014 Why It's Hard to Change (\"Maintainability\")"
+      },
+      {
+        "kind": "flip",
+        "front": "Contrast a **well-maintained codebase** with a **poorly maintained codebase**.",
+        "back": "- **Well-maintained:** orderly, clearly organized, like a well-stocked toolkit. Engineers spend less time wrestling with the code.\n- **Poorly maintained:** tangled, confusing, no consistent organization. Engineers spend more time **understanding what is happening and analyzing for change** than actually writing changes.",
+        "tag": "Section C \u2014 Why It's Hard to Change (\"Maintainability\")"
+      },
+      {
+        "kind": "flip",
+        "front": "What single sentence captures *why* maintenance is hard? (\"It's not a bug \u2014 it's _____.\")",
+        "back": "**Evolution.** Software faces constant pressure from new operating systems, updated 3rd-party APIs, security vulnerabilities, changing user demands, and new feature requests. Successful software is **never 'done.'**",
+        "tag": "Section C \u2014 Why It's Hard to Change (\"Maintainability\")"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the five forces that drive software evolution (per the \"It's Not a Bug, It's Evolution\" slide).",
+        "back": "1. New Operating Systems\n2. Changing User Demands\n3. Updated 3rd-Party APIs\n4. New Feature Requests\n5. Security Vulnerabilities",
+        "tag": "Section C \u2014 Why It's Hard to Change (\"Maintainability\")"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **six core activities** that make up the maintainer's role.",
+        "back": "1. **Tracking Requests** \u2014 logging and tracking every modification request.\n2. **Impact Analysis** \u2014 determining the effect of proposed changes on the entire system.\n3. **Modification** \u2014 changing the code (and other artifacts like docs!).\n4. **Testing** \u2014 rigorously testing changes before release.\n5. **Release Management** \u2014 releasing the new version of the product to users.\n6. **User Support** \u2014 providing training and daily support through the help desk.",
+        "tag": "Section D \u2014 The Maintainer's Role / Activities"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: A maintainer's job is to **sustain the software product throughout its entire _______**.",
+        "back": "**life cycle.**",
+        "tag": "Section D \u2014 The Maintainer's Role / Activities"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which are responsibilities of a software maintainer?",
+        "options": [
+          "Logging and tracking each change request",
+          "Determining how a change affects other parts of the system",
+          "User support and training",
+          "Cutting the marketing budget"
+        ],
+        "answer": [
+          0,
+          1,
+          2
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section D \u2014 The Maintainer's Role / Activities"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the three core activities in the **maintenance lifecycle loop**.",
+        "back": "1. **Problem and Modification Analysis**\n2. **Modification Implementation**\n3. **Maintenance Review / Acceptance**\n\n(Plus surrounding the loop: Process Implementation feeds in; Retirement and Migration are exit paths.)",
+        "tag": "Section E \u2014 Lifecycle of a Living Product"
+      },
+      {
+        "kind": "flip",
+        "front": "What two outcomes can end the maintenance loop (exits)?",
+        "back": "**Retirement** (decommissioning the software) or **Migration** (moving the software to a new platform/system).",
+        "tag": "Section E \u2014 Lifecycle of a Living Product"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **two approaches to maintenance estimation**.",
+        "back": "1. **Parametric Models** \u2014 use mathematical models to predict cost.\n2. **Expert Judgment** \u2014 rely on the experience of senior engineers and managers.",
+        "tag": "Section F \u2014 Estimation"
+      },
+      {
+        "kind": "flip",
+        "front": "What does a **parametric model** require?",
+        "back": "Historical data from past maintenance projects, plus **cost driver attributes** (e.g., complexity, team size) that the model uses to derive an estimate.",
+        "tag": "Section F \u2014 Estimation"
+      },
+      {
+        "kind": "flip",
+        "front": "What does **expert judgment** rely on?",
+        "back": "The **experience of senior engineers and managers**. Experts estimate the effort (people, time), which is then used to derive cost.",
+        "tag": "Section F \u2014 Estimation"
+      },
+      {
+        "kind": "flip",
+        "front": "What does the course recommend as the best approach?",
+        "back": "Combine the two \u2014 **historical data with experience.** Neither alone is as reliable as both together.",
+        "tag": "Section F \u2014 Estimation"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is true of parametric estimation?",
+        "options": [
+          "It needs no past data.",
+          "It uses mathematical models calibrated by historical data and cost drivers.",
+          "It is always more accurate than expert judgment.",
+          "It is the only approach allowed in industry."
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section F \u2014 Estimation"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **four planning levels** for maintenance (\"Planning at Every Level\" pyramid).",
+        "back": "From bottom (long-term) to top (short-term):\n1. **Business Level** \u2014 aligning team's budget, resources, and priorities with the organization's goals.\n2. **Transition Level** \u2014 planning the handover of new code from development to the maintenance team.\n3. **Release/Version Level** \u2014 bundling multiple requests into a release: agreeing on content, assessing risk, creating back-out plans.\n4. **Request Level** \u2014 planning the execution of a *single* change request (where impact analysis happens).",
+        "tag": "Section G \u2014 Strategic Planning at Every Level"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the *Request Level* of maintenance planning?",
+        "back": "Planning the execution of a **single change request**. This is the level where **impact analysis** happens.",
+        "tag": "Section G \u2014 Strategic Planning at Every Level"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the *Release/Version Level*?",
+        "back": "**Bundling multiple requests** into a release: agreeing on content, assessing risk, creating back-out plans.",
+        "tag": "Section G \u2014 Strategic Planning at Every Level"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the *Transition Level*?",
+        "back": "Planning the **handover of new code** from the development team to the maintenance team.",
+        "tag": "Section G \u2014 Strategic Planning at Every Level"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the *Business Level*?",
+        "back": "Aligning the team's **budget, resources, and priorities** with the broader organization's goals.",
+        "tag": "Section G \u2014 Strategic Planning at Every Level"
+      },
+      {
+        "kind": "flip",
+        "front": "Why is maintenance planning described as *proactive*, not reactive?",
+        "back": "Because the maintenance phase can last for many years, **far longer** than the original development. Without planning across multiple horizons, the team will always be firefighting.",
+        "tag": "Section G \u2014 Strategic Planning at Every Level"
+      },
+      {
+        "kind": "flip",
+        "front": "What is **reengineering**?",
+        "back": "The examination and alteration of software to **reconstitute it in a new form**. It is more drastic than refactoring \u2014 typically needed when the codebase is so tangled that small refactorings are no longer enough.",
+        "tag": "Section H \u2014 Reengineering & Refactoring"
+      },
+      {
+        "kind": "flip",
+        "front": "What is **refactoring**?",
+        "back": "A key reengineering technique that **improves a program's internal structure without changing its external behavior**. It's how you pay down technical debt and keep complexity manageable.",
+        "tag": "Section H \u2014 Reengineering & Refactoring"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Refactoring isn't a massive, one-time project \u2014 it's a small, _______ that you should be doing during minor changes.",
+        "back": "**continuous improvement loop.**",
+        "tag": "Section H \u2014 Reengineering & Refactoring"
+      },
+      {
+        "kind": "flip",
+        "front": "When refactoring is *not* enough, what do you do?",
+        "back": "**Reengineering** \u2014 a more drastic restructuring (sometimes a near-rewrite) to put the system back into a maintainable form.",
+        "tag": "Section H \u2014 Reengineering & Refactoring"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is true of refactoring?",
+        "options": [
+          "It changes external behavior to add new features.",
+          "It changes internal structure without changing external behavior.",
+          "It is the same as rewriting from scratch.",
+          "It should only be done once per year."
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section H \u2014 Reengineering & Refactoring"
+      },
+      {
+        "kind": "flip",
+        "front": "What is **reverse engineering** in software?",
+        "back": "A **passive process** that does **not** change the software. It analyzes the software to:\n- **Re-document** functionality.\n- **Design recovery** \u2014 recreate design decisions from a system that has lost them.\n- **Data Reverse Engineering** \u2014 recover the data model from physical databases.",
+        "tag": "Section I \u2014 Reverse Engineering / Software Archaeology"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **three common reverse-engineering goals**.",
+        "back": "1. **Re-documentation** \u2014 produce alternative views (e.g., diagrams) from source code.\n2. **Design recovery** \u2014 extract design decisions / abstractions.\n3. **Data Reverse Engineering** \u2014 recover a data model from physical database schemas.",
+        "tag": "Section I \u2014 Reverse Engineering / Software Archaeology"
+      },
+      {
+        "kind": "flip",
+        "front": "What is **Software Archaeology**?",
+        "back": "A discipline focused on recovering **what the original designers were thinking** and how a legacy system actually works, often by reverse-engineering and inspecting code, schemas, and historical documents.",
+        "tag": "Section I \u2014 Reverse Engineering / Software Archaeology"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Reverse engineering is a **passive** process \u2014 it does **not** ___ the software.",
+        "back": "**change.**",
+        "tag": "Section I \u2014 Reverse Engineering / Software Archaeology"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the tools in **Maintainer's Toolkit Part 1: Comprehension & Analysis**.",
+        "back": "Used to **analyze and understand** an existing codebase:\n1. **Program Slicers** \u2014 isolate and view only the parts of a program relevant to a specific question.\n2. **Static Analyzers** \u2014 inspect program content/structure *without* executing it. Find complexity, bugs, vulnerabilities.\n3. **Data Flow Analyzers** \u2014 track how data moves through a program from input to output.\n4. **Cross-References** \u2014 show where elements (variables, functions) are used.\n5. **Dynamic Analyzers** \u2014 trace the execution of a program to understand runtime behavior.\n6. **Dependency Analyzers** \u2014 understand the relationships and dependencies between modules.",
+        "tag": "Section J \u2014 The Maintainer's Toolkits"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the tools in **Maintainer's Toolkit Part 2: Reverse Engineering**.",
+        "back": "Tools that \"work backward from the existing product\" to create high-level artifacts when planning major reengineering or migration:\n1. **Software Test Frameworks**\n2. **Software Configuration Management** tools (e.g., Confluent / SCM platforms)\n3. **Documentation Systems**\n4. **Software Measurement and Monitoring tools**",
+        "tag": "Section J \u2014 The Maintainer's Toolkits"
+      },
+      {
+        "kind": "flip",
+        "front": "What's the difference between **comprehension/analysis** tools and **reverse engineering** tools?",
+        "back": "- **Comprehension & Analysis (Part 1):** small-scale, day-to-day understanding of an *existing* codebase.\n- **Reverse Engineering (Part 2):** producing high-level artifacts (designs, docs, test frameworks, measurements) typically for **major reengineering or migration**.",
+        "tag": "Section J \u2014 The Maintainer's Toolkits"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which of these are reverse-engineering / archaeology activities?",
+        "options": [
+          "Recovering the design of a legacy system from its source.",
+          "Producing diagrams from the existing code.",
+          "Adding a brand-new feature requested by a user.",
+          "Recreating the data model from a physical database."
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ],
+        "multi": true,
+        "explain": "C is perfective maintenance, not reverse engineering.",
+        "tag": "Section J \u2014 The Maintainer's Toolkits"
+      }
+    ]
+  },
+  {
+    "id": "quality",
+    "name": "Software Quality",
+    "short": "CoSQ, iron triangle, V&V, SQM",
+    "emoji": "\u2728",
+    "color": "#FFF6CC",
+    "accent": "#C19A1F",
+    "glyph": "scale",
+    "cards": [
+      {
+        "kind": "flip",
+        "front": "What does the principle \"Quality is Not an Accident\" mean?",
+        "back": "Software quality is **not a vague goal** \u2014 it is **a set of measurable attributes defined by your stakeholders**. Quality must be deliberately designed in, agreed on, and measured against.",
+        "tag": "Section A \u2014 Quality Is Not an Accident"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Core Concept** of software quality?",
+        "back": "**Software requirements define the required quality attributes of the software.** Quality means **conformance to requirements**, not subjective \"goodness.\"",
+        "tag": "Section A \u2014 Quality Is Not an Accident"
+      },
+      {
+        "kind": "flip",
+        "front": "What does it mean to \"succeed with quality\" for a stakeholder-driven product?",
+        "back": "You must reach a **formal agreement** on what constitutes quality for **all** stakeholders (artists, fans, venue owners), and **clearly communicate** that agreement to the engineering team. Success is **measured against those defined quality levels.**",
+        "tag": "Section A \u2014 Quality Is Not an Accident"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Quality is achieved by **conformance to all _______** regardless of what characteristics are specified or how they are grouped.",
+        "back": "**requirements.**",
+        "tag": "Section A \u2014 Quality Is Not an Accident"
+      },
+      {
+        "kind": "flip",
+        "front": "Define **software quality** (formal course definition).",
+        "back": "Software quality is the **capability of a software product to satisfy stated and implied needs under specified conditions.**",
+        "tag": "Section B \u2014 Definition of Software Quality"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **four sub-areas** that make up software quality (the \"What Goes Into Software Quality\" ribbon).",
+        "back": "1. **Fundamentals** (definitions, foundational principles)\n2. **Management Process** (SQM)\n3. **Practical Considerations**\n4. **Tools**",
+        "tag": "Section B \u2014 Definition of Software Quality"
+      },
+      {
+        "kind": "flip",
+        "front": "What does \"fitness for use\" mean in the context of software quality?",
+        "back": "It is shorthand for **delivering maximum stakeholder value while balancing constraints of development cost and schedule**. The product is \"fit\" if it serves stakeholder needs within the agreed constraints.",
+        "tag": "Section B \u2014 Definition of Software Quality"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Iron Triangle** of project management?",
+        "back": "The unavoidable trade-off between **Cost, Quality, and Schedule.** You can't optimize all three at once; raising one usually means giving on another.",
+        "tag": "Section C \u2014 The Iron Triangle"
+      },
+      {
+        "kind": "flip",
+        "front": "State the Iron Triangle's \"unavoidable trade-off\" rule.",
+        "back": "**Fast & Cheap = Low Quality.** **Fast & High-Quality = Expensive.** **Cheap & High-Quality = Slow.** You can have any two \u2014 but not all three at full strength.",
+        "tag": "Section C \u2014 The Iron Triangle"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: For all engineered products, the primary goal is delivering maximum stakeholder value while balancing the constraints of _______ and _______.",
+        "back": "**development cost** and **schedule** (\"fitness for use\").",
+        "tag": "Section C \u2014 The Iron Triangle"
+      },
+      {
+        "kind": "flip",
+        "front": "(MCQ \u2014 select all that apply) Which of the following can a project optimize **simultaneously** without trade-off?",
+        "back": "None of the combinations come for free; you can pick **two** at a time, but never all three. So the answer is **none of A\u2013D guarantees no trade-off.** The Iron Triangle says you sacrifice one to maximize the other two.",
+        "tag": "Section C \u2014 The Iron Triangle"
+      },
+      {
+        "kind": "flip",
+        "front": "If a CEO insists on launching **before a major schedule constraint** without raising cost, what is the inevitable casualty?",
+        "back": "**Quality** \u2014 fast + cheap = low quality.",
+        "tag": "Section C \u2014 The Iron Triangle"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Cost of Software Quality (CoSQ)**?",
+        "back": "A framework that **infers product quality from the *economic cost* of preventing, finding, and fixing failures.** It tells us where money is being spent on quality (or the lack of it).",
+        "tag": "Section D \u2014 Cost of Software Quality (CoSQ)"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Premise** of CoSQ?",
+        "back": "The level of quality in a product can be **inferred from the economic cost of activities related to preventing, finding, and fixing failures.**",
+        "tag": "Section D \u2014 Cost of Software Quality (CoSQ)"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **four CoSQ categories** (Four Levers of Quality Investment).",
+        "back": "1. **Prevention Costs** \u2014 investments to prevent defects *before* they happen.\n2. **Appraisal Costs** \u2014 costs to find defects *during* development.\n3. **Internal Failure Costs** \u2014 costs of defects found *before* delivery to the customer.\n4. **External Failure Costs** \u2014 costs of problems discovered *after* delivery.",
+        "tag": "Section D \u2014 Cost of Software Quality (CoSQ)"
+      },
+      {
+        "kind": "flip",
+        "front": "Match the CoSQ category to its example.\n1. Prevention      a. Process improvement, quality tools, training, audits\n2. Appraisal       b. Help desk support, warranty repairs, legal fees, brand damage\n3. Internal Failure  c. Design reviews, peer reviews, all forms of testing\n4. External Failure  d. Rework, re-testing, debugging time",
+        "back": "1\u2192a, 2\u2192c, 3\u2192d, 4\u2192b.",
+        "tag": "Section D \u2014 Cost of Software Quality (CoSQ)"
+      },
+      {
+        "kind": "flip",
+        "front": "Which two CoSQ categories are *Investment in Quality* (smart upfront cost), and which two are *Cost of Poor Quality* (massive ongoing cost)?",
+        "back": "- **Investment in Quality:** **Prevention** and **Appraisal**.\n- **Cost of Poor Quality:** **Internal Failure** and **External Failure**.",
+        "tag": "Section D \u2014 Cost of Software Quality (CoSQ)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is an example of a **prevention** cost?",
+        "options": [
+          "Help desk fielding bug calls after release",
+          "A team training course on secure coding",
+          "Rework after a failed system test",
+          "Peer review of a pull request"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "(D is appraisal; A is external failure; C is internal failure.)",
+        "tag": "Section D \u2014 Cost of Software Quality (CoSQ)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is an example of an **external failure** cost?",
+        "options": [
+          "A QA team's salary",
+          "Refactoring after a code review finds duplication",
+          "Warranty repairs after release",
+          "A pre-release security audit"
+        ],
+        "answer": 2,
+        "multi": false,
+        "explain": "",
+        "tag": "Section D \u2014 Cost of Software Quality (CoSQ)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which CoSQ categories occur **before** delivery to the customer?",
+        "options": [
+          "Prevention",
+          "Appraisal",
+          "Internal Failure",
+          "External Failure"
+        ],
+        "answer": [
+          0,
+          1,
+          2
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section D \u2014 Cost of Software Quality (CoSQ)"
+      },
+      {
+        "kind": "flip",
+        "front": "Define **Software Quality Management (SQM)**.",
+        "back": "SQM is the **collection of all processes that ensure** software products, services, and life-cycle process implementations meet **organizational software quality objectives** and achieve stakeholder satisfaction.",
+        "tag": "Section E \u2014 Software Quality Management (SQM)"
+      },
+      {
+        "kind": "flip",
+        "front": "What does SQM define / control?",
+        "back": "SQM defines **processes, process owners, requirements for the processes, measurements of the processes and their outputs, and feedback channels** throughout the whole software life cycle.",
+        "tag": "Section E \u2014 Software Quality Management (SQM)"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **four sub-categories** of SQM.",
+        "back": "1. **Software Quality Planning (SQP)**\n2. **Software Quality Assurance (SQA)**\n3. **Software Quality Control (SQC)**\n4. **Software Process Improvement (SPI)**",
+        "tag": "Section E \u2014 Software Quality Management (SQM)"
+      },
+      {
+        "kind": "flip",
+        "front": "What does **Software Quality Planning (SQP)** include?",
+        "back": "Determining **which quality standards** should be applied, defining **specific quality goals**, and **estimating the effort and schedule** of software quality activities.",
+        "tag": "Section E \u2014 Software Quality Management (SQM)"
+      },
+      {
+        "kind": "flip",
+        "front": "Quick definitions: SQA vs SQC vs SPI.",
+        "back": "- **SQA (Quality Assurance):** ensures the *processes* are being followed correctly \u2014 process-oriented.\n- **SQC (Quality Control):** verifies that the *product* meets requirements \u2014 product-oriented (testing, inspections).\n- **SPI (Process Improvement):** continuously improves the processes themselves over time.",
+        "tag": "Section E \u2014 Software Quality Management (SQM)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which are sub-categories of SQM?",
+        "options": [
+          "SQA",
+          "SCM",
+          "SQC",
+          "SPI",
+          "SQP"
+        ],
+        "answer": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "multi": true,
+        "explain": "(SCM is Software *Configuration* Management, a separate discipline.)",
+        "tag": "Section E \u2014 Software Quality Management (SQM)"
+      },
+      {
+        "kind": "flip",
+        "front": "Define **Verification**.",
+        "back": "**\"Are we building the product right?\"** An attempt to ensure that the **output products of an activity meet the specifications imposed on them in previous activities.** Does our code meet the design spec?",
+        "tag": "Section F \u2014 Verification vs. Validation (V&V)"
+      },
+      {
+        "kind": "flip",
+        "front": "Define **Validation**.",
+        "back": "**\"Are we building the right product?\"** An attempt to ensure that **the right product is built** \u2014 that is, the product fulfills its specific intended purpose. Does the feature actually solve the user's problem?",
+        "tag": "Section F \u2014 Verification vs. Validation (V&V)"
+      },
+      {
+        "kind": "flip",
+        "front": "Memorize the catch-phrases: Verification = ___? Validation = ___?",
+        "back": "- **Verification:** \"Are we building the product **right**?\"\n- **Validation:** \"Are we building the **right** product?\"",
+        "tag": "Section F \u2014 Verification vs. Validation (V&V)"
+      },
+      {
+        "kind": "flip",
+        "front": "Give a verification question and a validation question for an \"Apply Filter\" feature.",
+        "back": "- **Verification:** \"Does our code meet the design spec for the filter algorithm?\"\n- **Validation:** \"Does this filter actually solve the artist/photographer's problem in the way they need?\"",
+        "tag": "Section F \u2014 Verification vs. Validation (V&V)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) \"Does the system meet the requirements documented in the spec?\" is which kind of question?",
+        "options": [
+          "Verification",
+          "Validation",
+          "Both",
+          "Neither"
+        ],
+        "answer": 0,
+        "multi": false,
+        "explain": "",
+        "tag": "Section F \u2014 Verification vs. Validation (V&V)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) \"Does this product solve the customer's actual problem?\" is which kind of question?",
+        "options": [
+          "Verification",
+          "Validation",
+          "Both",
+          "Neither"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section F \u2014 Verification vs. Validation (V&V)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which statements about software quality are correct?",
+        "options": [
+          "Quality is conformance to requirements.",
+          "Quality is achieved by accident with talented engineers.",
+          "Quality is the capability to satisfy stated and implied needs under specified conditions.",
+          "Quality is purely subjective and cannot be measured."
+        ],
+        "answer": [
+          0,
+          2
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section G \u2014 Catch-All Quality MCQs"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which CoSQ category captures the costs of **finding** defects during development?",
+        "options": [
+          "Prevention",
+          "Appraisal",
+          "Internal Failure",
+          "External Failure"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section G \u2014 Catch-All Quality MCQs"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is the **most expensive** category of CoSQ?",
+        "options": [
+          "Prevention",
+          "Appraisal",
+          "Internal Failure",
+          "External Failure"
+        ],
+        "answer": 3,
+        "multi": false,
+        "explain": "",
+        "tag": "Section G \u2014 Catch-All Quality MCQs"
+      }
+    ]
+  },
+  {
+    "id": "scm",
+    "name": "Configuration Mgmt",
+    "short": "SCM, baselines, SCIs, four core functions",
+    "emoji": "\ud83d\udce6",
+    "color": "#E2DCFF",
+    "accent": "#6448E0",
+    "glyph": "puzzle",
+    "cards": [
+      {
+        "kind": "flip",
+        "front": "Define **Software Configuration Management (SCM)** \u2014 formal definition.",
+        "back": "SCM is the **discipline of identifying the configuration of a system at distinct points in time** in order to **systematically control changes to the configuration** and **maintain the integrity and traceability of the configuration** throughout the system life cycle.",
+        "tag": "Section A \u2014 What SCM Is"
+      },
+      {
+        "kind": "flip",
+        "front": "What is SCM in plain English?",
+        "back": "SCM is the **rulebook** for:\n- **Knowing** exactly what comprises your software.\n- **Controlling** how, when, and why it changes.\n- **Keeping** a complete history of every change ever made.",
+        "tag": "Section A \u2014 What SCM Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: In software engineering, software configuration management is the **task of tracking and controlling _______ in the software**.",
+        "back": "**changes.**",
+        "tag": "Section A \u2014 What SCM Is"
+      },
+      {
+        "kind": "flip",
+        "front": "What are the **six sub-areas** in SCM (the SCM ribbon)?",
+        "back": "1. Management of the SCM process\n2. Identification\n3. Control\n4. Status Accounting\n5. Auditing\n6. Software Release Management and Delivery\n(Plus a tools/management overlay.)",
+        "tag": "Section A \u2014 What SCM Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **four core functions** of SCM.",
+        "back": "**Identify, Control, Audit, Report.**",
+        "tag": "Section B \u2014 The Four Core Functions of SCM"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Identify** function of SCM?",
+        "back": "Cataloging every piece of the project. This includes **code, documentation, design models, and test data.** *\"What are we controlling?\"*",
+        "tag": "Section B \u2014 The Four Core Functions of SCM"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Control** function of SCM?",
+        "back": "Manage changes to the project. This involves a **formal process for proposing, evaluating, and approving changes.** *\"How do we prevent chaos?\"*",
+        "tag": "Section B \u2014 The Four Core Functions of SCM"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Audit** function of SCM?",
+        "back": "**Verify** the product is correct. It means checking that the approved changes were actually implemented and that the final product matches the documentation. *\"Is what we built what we **planned** to build?\"*",
+        "tag": "Section B \u2014 The Four Core Functions of SCM"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Report** function of SCM?",
+        "back": "Document the process. This involves tracking the status of all changes and providing a clear history of the project's evolution. *\"What changed, and when?\"*",
+        "tag": "Section B \u2014 The Four Core Functions of SCM"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: SCM identifies items, controls **changes**, audits the result, and **_______**.",
+        "back": "**reports** the history.",
+        "tag": "Section B \u2014 The Four Core Functions of SCM"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which SCM core function answers \"Is what we built what we planned to build?\"",
+        "options": [
+          "Identify",
+          "Control",
+          "Audit",
+          "Report"
+        ],
+        "answer": 2,
+        "multi": false,
+        "explain": "",
+        "tag": "Section B \u2014 The Four Core Functions of SCM"
+      },
+      {
+        "kind": "flip",
+        "front": "Why is SCM the foundation of Software Quality Assurance (SQA)?",
+        "back": "A good SCM process is your **best defense against bugs and failed releases**. It supports SQA by ensuring **traceability, reproducibility, and consistency**.",
+        "tag": "Section C \u2014 SCM as the Foundation of SQA"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **three SQA pillars** that SCM enables.",
+        "back": "1. **Traceability** \u2014 every line of code can be traced back to a specific requirement or approved change request.\n2. **Reproducibility** \u2014 we can reliably recreate any previous version of the software for investigation.\n3. **Consistency** \u2014 code, documentation, and final product are always in sync.",
+        "tag": "Section C \u2014 SCM as the Foundation of SQA"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: \"SQA processes provide assurance that the software products and processes conform to their specified requirements... SCM activities help in accomplishing this _______ goal.\"",
+        "back": "**SQA**.",
+        "tag": "Section C \u2014 SCM as the Foundation of SQA"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which SQA pillars does SCM directly support?",
+        "options": [
+          "Traceability",
+          "Reproducibility",
+          "Marketability",
+          "Consistency"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section C \u2014 SCM as the Foundation of SQA"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the first step of control in SCM?",
+        "back": "**Identification.** \"**You cannot control what you cannot identify.**\"",
+        "tag": "Section D \u2014 Identification (The First Step)"
+      },
+      {
+        "kind": "flip",
+        "front": "Define **software configuration identification**.",
+        "back": "The **process of identifying items to be controlled** and **establishing unique identification schemes** for them and their versions.",
+        "tag": "Section D \u2014 Identification (The First Step)"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: To solve our bug problem, we can't just dive into the code \u2014 we first need a system. This discipline is called **_______**.",
+        "back": "**Software Configuration Management (SCM).**",
+        "tag": "Section D \u2014 Identification (The First Step)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) \"You cannot control what you cannot _______.\" Fill in the blank.",
+        "options": [
+          "measure",
+          "identify",
+          "test",
+          "document"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section D \u2014 Identification (The First Step)"
+      },
+      {
+        "kind": "flip",
+        "front": "What is a **Software Configuration Item (SCI)**?",
+        "back": "Any **software entity managed as a single unit** under SCM. Think of SCIs as the **official building blocks** of your product.",
+        "tag": "Section E \u2014 Software Configuration Items (SCIs)"
+      },
+      {
+        "kind": "flip",
+        "front": "Why don't we manage the entire software as one giant monolith?",
+        "back": "A monolith is too big to track. Instead, we manage **individual, trackable pieces (SCIs)** \u2014 making changes localized and traceable.",
+        "tag": "Section E \u2014 Software Configuration Items (SCIs)"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **balancing act** when choosing SCIs?",
+        "back": "- **Too few** SCIs \u2192 you don't have enough control.\n- **Too many** SCIs \u2192 the system becomes too complex to manage.\n\nYou need to pick the right granularity.",
+        "tag": "Section E \u2014 Software Configuration Items (SCIs)"
+      },
+      {
+        "kind": "flip",
+        "front": "Examples of typical SCIs?",
+        "back": "Source-code modules, design documents, test scripts, build files, requirements specs, third-party libraries with specific versions, configuration files.",
+        "tag": "Section E \u2014 Software Configuration Items (SCIs)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which of the following could be SCIs?",
+        "options": [
+          "A specific version of a video editor module.",
+          "A loose comment in a chat thread.",
+          "A test script.",
+          "A design document.",
+          "A coffee order."
+        ],
+        "answer": [
+          0,
+          2,
+          3
+        ],
+        "multi": true,
+        "explain": "SCIs must be formally trackable units.",
+        "tag": "Section E \u2014 Software Configuration Items (SCIs)"
+      },
+      {
+        "kind": "flip",
+        "front": "Define a **baseline** (formal definition).",
+        "back": "A software baseline is a **formally approved version of a configuration item** that is **formally designated and fixed at a specific time** during the configuration item's life cycle.",
+        "tag": "Section F \u2014 Baselines"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the **Key Idea** behind a baseline?",
+        "back": "The baseline, **together with all approved changes to it**, represents the **current approved configuration**.",
+        "tag": "Section F \u2014 Baselines"
+      },
+      {
+        "kind": "flip",
+        "front": "Memorize **The Rule** for baselines.",
+        "back": "You can **only** change a baseline through **formal change-control procedures**. **No more informal, \"on-the-fly\" substitutions.** This is what provides **control and predictability.**",
+        "tag": "Section F \u2014 Baselines"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the metaphor for a baseline?",
+        "back": "A **snapshot in time** \u2014 like taking all the correct pieces, putting them in a box, sealing it, and labeling it \"Nexus Professional v2.1.\" Once established, it cannot be changed without a formal process.",
+        "tag": "Section F \u2014 Baselines"
+      },
+      {
+        "kind": "flip",
+        "front": "What problem do baselines solve?",
+        "back": "Without baselines, SCIs are a **jumble of versions** that don't fit together. Baselines group a specific set of SCI versions and give them a **single name** so we always know what versions work together.",
+        "tag": "Section F \u2014 Baselines"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: Once a baseline is established, it is **formally fixed**. It cannot be changed without going through a **_______ process**.",
+        "back": "**formal (change-control)** process.",
+        "tag": "Section F \u2014 Baselines"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is true of a baseline?",
+        "options": [
+          "It can be modified informally to keep up with development speed.",
+          "It is a formally approved snapshot of a configuration item.",
+          "It is automatically the latest commit in source control.",
+          "It applies only to documentation, never code."
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section F \u2014 Baselines"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is **not** one of the four core SCM functions?",
+        "options": [
+          "Identify",
+          "Control",
+          "Audit",
+          "Report",
+          "Refactor"
+        ],
+        "answer": 4,
+        "multi": false,
+        "explain": "",
+        "tag": "Section G \u2014 Catch-All SCM MCQs"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which of the following are concerns of SCM?",
+        "options": [
+          "Knowing what comprises your software",
+          "Controlling how, when, and why software changes",
+          "Determining what color the UI button should be",
+          "Keeping a complete history of every change"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section G \u2014 Catch-All SCM MCQs"
+      },
+      {
+        "kind": "flip",
+        "front": "(Scenario) A team's release goes out, and a regression appears. The team wants to recreate the exact build that was running last week to debug. Which SCM-supported SQA pillar makes this possible?",
+        "back": "**Reproducibility.**",
+        "tag": "Section G \u2014 Catch-All SCM MCQs"
+      },
+      {
+        "kind": "flip",
+        "front": "(Scenario) An auditor asks \"Why does this line of code exist?\" Which SQA pillar (supported by SCM) lets you answer?",
+        "back": "**Traceability** \u2014 every line of code can be traced back to a specific approved change request or requirement.",
+        "tag": "Section G \u2014 Catch-All SCM MCQs"
+      }
+    ]
+  },
+  {
+    "id": "management",
+    "name": "SE Management",
+    "short": "Three pillars, communication, 1-on-1s",
+    "emoji": "\ud83d\udc65",
+    "color": "#D6F0FF",
+    "accent": "#1F7AE0",
+    "glyph": "diagram",
+    "cards": [
+      {
+        "kind": "flip",
+        "front": "Define **Software Engineering Management** (formal definition).",
+        "back": "Software Engineering Management is **the application of management activities to ensure that software products and software engineering services are delivered efficiently, effectively, and to the benefit of stakeholders.**",
+        "tag": "Section A \u2014 What SE Management Is"
+      },
+      {
+        "kind": "flip",
+        "front": "What is \"the application of management activities\" really about, in this context?",
+        "back": "Ensuring software products and services are delivered:\n- **Efficiently** (good use of resources),\n- **Effectively** (achieving the intended outcome), and\n- **To the benefit of stakeholders** (delivering real value).",
+        "tag": "Section A \u2014 What SE Management Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **seven sub-areas** of SE management on the course's overview ribbon.",
+        "back": "1. What do managers do?\n2. How to become a manager\n3. Manager Skills\n4. Manager Mistakes\n5. How to be a good manager\n6. Manager meetings\n7. Manager delegations",
+        "tag": "Section A \u2014 What SE Management Is"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **Three Pillars of Management** (the manager's mandate).",
+        "back": "1. **People** \u2014 lead and grow a team of talented engineers.\n2. **Product** \u2014 own the technical vision and successful delivery of the feature.\n3. **Process** \u2014 create a smooth and efficient system for getting work done.",
+        "tag": "Section B \u2014 The Three Pillars of Management"
+      },
+      {
+        "kind": "flip",
+        "front": "Match each pillar to its summary.\n1. People    a. Own the technical vision and delivery\n2. Product   b. Lead and grow a team of engineers\n3. Process   c. Create the system for getting work done",
+        "back": "1\u2192b, 2\u2192a, 3\u2192c.",
+        "tag": "Section B \u2014 The Three Pillars of Management"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: To succeed in your mission, you must master three key domains. These are the **_______** of your new role.",
+        "back": "**pillars.**",
+        "tag": "Section B \u2014 The Three Pillars of Management"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which of the following are among the three pillars of management?",
+        "options": [
+          "People",
+          "Product",
+          "Profit",
+          "Process",
+          "Performance Reviews"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section B \u2014 The Three Pillars of Management"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: **Great managers are more than just _______ engineers.**",
+        "back": "**experienced.**",
+        "tag": "Section C \u2014 Foundation of Manager Success"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the foundation of a manager's success, beyond technical knowledge?",
+        "back": "Managers combine **deep technical knowledge** with **emotional intelligence** required to head off workplace politics and create a safe, high-performance environment.",
+        "tag": "Section C \u2014 Foundation of Manager Success"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: A manager's job isn't just to build the **feature** \u2014 it's to build the **_______** that builds the feature.",
+        "back": "**team.**",
+        "tag": "Section C \u2014 Foundation of Manager Success"
+      },
+      {
+        "kind": "flip",
+        "front": "What is **emotional intelligence** in the context of management, and why does it matter?",
+        "back": "It is the ability to **read the room, navigate interpersonal dynamics, and prevent or defuse politics**. It matters because a high-performance environment is a *human* environment \u2014 the technical work depends on healthy relationships.",
+        "tag": "Section C \u2014 Foundation of Manager Success"
+      },
+      {
+        "kind": "flip",
+        "front": "What is **The Manager's Role in a Crisis**?",
+        "back": "Problem-solving extends beyond the code \u2014 managers must **navigate organizational challenges**, advocate to upper management, justify investments, and **defend the team's work** to the rest of the organization.",
+        "tag": "Section C \u2014 Foundation of Manager Success"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which is most accurate about great managers?",
+        "options": [
+          "They simply have more years coding than the team.",
+          "They combine deep technical knowledge with emotional intelligence.",
+          "They focus only on output metrics, not relationships.",
+          "They are interchangeable with senior individual contributors."
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section C \u2014 Foundation of Manager Success"
+      },
+      {
+        "kind": "flip",
+        "front": "What are **The Three Directions of Communication** for a manager?",
+        "back": "1. **Upward** (to Leadership)\n2. **Inward** (to Your Team)\n3. **Outward** (to Customers / Partner Teams)",
+        "tag": "Section D \u2014 Three Directions of Communication"
+      },
+      {
+        "kind": "flip",
+        "front": "Describe each direction:\n- **Upward**\n- **Inward**\n- **Outward**",
+        "back": "- **Upward (to Leadership):** Focus on **progress, risks, and resource needs.** Be **concise and strategic.**\n- **Inward (to Your Team):** Focus on **goals, feedback, and removing blockers.** Be **clear and supportive.**\n- **Outward (to Customers / Partner Teams):** Focus on **what the feature does and how to use it.** Be **simple and direct.**",
+        "tag": "Section D \u2014 Three Directions of Communication"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: As a manager, you must tailor your **_______** for different audiences to build positive relationships and align everyone on common objectives.",
+        "back": "**communication.**",
+        "tag": "Section D \u2014 Three Directions of Communication"
+      },
+      {
+        "kind": "flip",
+        "front": "What does \"Don't Forget to Manage Up and Out\" mean?",
+        "back": "Your role as a manager is a **communication hub**. You are the primary liaison between your team and the rest of the company. You must communicate to:\n- **Senior Management:** submit clear, concise proposals and progress reports; keep stakeholders informed of successes and roadblocks.\n- **Partner Teams** (e.g., SRE, UX, Marketing): collaborate to ensure a smooth, integrated launch.",
+        "tag": "Section D \u2014 Three Directions of Communication"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which direction of communication should be **strategic and concise**?",
+        "options": [
+          "Upward",
+          "Inward",
+          "Outward"
+        ],
+        "answer": 0,
+        "multi": false,
+        "explain": "",
+        "tag": "Section D \u2014 Three Directions of Communication"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which direction of communication should be **clear and supportive**?",
+        "options": [
+          "Upward",
+          "Inward",
+          "Outward"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section D \u2014 Three Directions of Communication"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Which direction of communication should be **simple and direct**, focused on what features do?",
+        "options": [
+          "Upward",
+          "Inward",
+          "Outward"
+        ],
+        "answer": 2,
+        "multi": false,
+        "explain": "",
+        "tag": "Section D \u2014 Three Directions of Communication"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the manager's \"**most important meeting**\"?",
+        "back": "The **One-on-One.** It is the manager's **single most valuable tool** for building connection and supporting growth.",
+        "tag": "Section E \u2014 One-on-Ones (The Most Important Meeting)"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the difference between a group meeting and a one-on-one?",
+        "back": "- **Group meetings** are for **feedback** (status, alignment, decisions).\n- **One-on-ones** are for **connection and growth** \u2014 focused on the individual.",
+        "tag": "Section E \u2014 One-on-Ones (The Most Important Meeting)"
+      },
+      {
+        "kind": "flip",
+        "front": "What is the recommended **cadence** for one-on-ones?",
+        "back": "- **Weekly** \u2014 have a 1-on-1 with each member of your team. This is for **status updates, roadblocks, and general support**.\n- **Monthly** \u2014 dedicate at least one of these meetings to **staff career goals and ideas**. This is your investment in their **future**.",
+        "tag": "Section E \u2014 One-on-Ones (The Most Important Meeting)"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: 1-on-1s are your **single most valuable tool** as a _______.",
+        "back": "**manager.**",
+        "tag": "Section E \u2014 One-on-Ones (The Most Important Meeting)"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) The one-on-one is for:",
+        "options": [
+          "Group decisions",
+          "Connection and growth with each individual",
+          "Replacing all email",
+          "Performance reviews only"
+        ],
+        "answer": 1,
+        "multi": false,
+        "explain": "",
+        "tag": "Section E \u2014 One-on-Ones (The Most Important Meeting)"
+      },
+      {
+        "kind": "flip",
+        "front": "Name the **three rules** of \"Taming the Beast: Your Meeting Playbook.\"",
+        "back": "1. **Justify its Existence.** Only organize a meeting if it's absolutely necessary and has a clear goal.\n2. **Curate the Guest List.** Invite only the people who need to be there. Respect everyone else's time.\n3. **Police the Tangents.** Steer the conversation back on topic, especially during technical debates.",
+        "tag": "Section F \u2014 The Meeting Playbook"
+      },
+      {
+        "kind": "flip",
+        "front": "Finish the sentence: As the manager, it's your job to **steer the conversation back on topic** \u2014 known as **_______ the tangents.**",
+        "back": "**policing.**",
+        "tag": "Section F \u2014 The Meeting Playbook"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which are rules from the manager's meeting playbook?",
+        "options": [
+          "Justify the meeting's existence.",
+          "Invite as many people as possible to maximize input.",
+          "Curate the guest list.",
+          "Police tangents to keep the meeting on goal.",
+          "Always run for the full scheduled time."
+        ],
+        "answer": [
+          0,
+          2,
+          3
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section F \u2014 The Meeting Playbook"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ) Software Engineering Management ensures software products and services are delivered:",
+        "options": [
+          "Cheaply only",
+          "Quickly only",
+          "Efficiently, effectively, and to the benefit of stakeholders",
+          "According to the developer's personal taste"
+        ],
+        "answer": 2,
+        "multi": false,
+        "explain": "",
+        "tag": "Section G \u2014 Catch-All Management MCQs"
+      },
+      {
+        "kind": "mcq",
+        "front": "(MCQ \u2014 select all that apply) Which are responsibilities of a software engineering manager?",
+        "options": [
+          "Defending the team's work to upper management",
+          "Navigating organizational politics",
+          "Writing every line of production code themselves",
+          "Removing blockers for the team",
+          "Cancelling all meetings, regardless of purpose"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ],
+        "multi": true,
+        "explain": "",
+        "tag": "Section G \u2014 Catch-All Management MCQs"
+      },
+      {
+        "kind": "flip",
+        "front": "(Scenario) Your project is going over budget. What is your communication priority *upward*?",
+        "back": "Be **concise and strategic** \u2014 frame the issue as **risk + resource need**, propose options, and explain the design's benefit to the organization to justify the investment.",
+        "tag": "Section G \u2014 Catch-All Management MCQs"
+      },
+      {
+        "kind": "flip",
+        "front": "(Scenario) A team member has been quiet and disengaged for two weeks. What management tool addresses this?",
+        "back": "A **one-on-one** focused on connection and growth. Use the weekly cadence for short-term blockers; if the issue is deeper, dedicate the next monthly conversation to career goals and personal motivation.",
+        "tag": "Section G \u2014 Catch-All Management MCQs"
+      }
+    ]
+  }
+]
