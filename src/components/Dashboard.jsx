@@ -1,8 +1,12 @@
 import { useMemo } from 'react';
 import { DECKS } from '../data/decks.js';
-import { getDeckProgress, getStreak, totalMastered } from '../lib/progress.js';
-
-const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+import {
+  getDailyTotals,
+  getDeckProgress,
+  getHeatmap,
+  getStreak,
+  totalMastered,
+} from '../lib/progress.js';
 
 export default function DashboardScreen() {
   const enriched = useMemo(
@@ -28,43 +32,18 @@ export default function DashboardScreen() {
   })();
   const streak = getStreak();
 
-  // Build a simple synthetic activity for the bar chart based on mastered counts.
-  // (Real per-day activity would need more storage; this gives the chart something
-  // meaningful to display while keeping the file simple.)
-  const activity = useMemo(() => {
-    const week = DAYS.map((day, i) => {
-      // distribute mastered cards across the days so the bar chart isn't empty
-      const r = ((Math.sin(i * 9.13 + (mastered + 1) * 1.7) + 1) / 2) * mastered;
-      const cards = Math.round(r);
-      return { day, cards, xp: cards * 25 };
-    });
-    return week;
-  }, [mastered]);
+  // Real per-day review counts for the last 7 days, oldest first.
+  const activity = useMemo(
+    () => getDailyTotals(7).map((b) => ({ day: b.day, cards: b.count, xp: b.count * 25 })),
+    [],
+  );
 
   const maxBar = Math.max(1, ...activity.map((a) => a.cards));
   const barColors = ['#FF8FB8', '#FFB877', '#FFE26A', '#8DE8B0', '#8FCBFF', '#C8A8FF', '#FF7A6A'];
 
-  // 7×24 heatmap — bias study toward 9am-11pm using a deterministic hash so the
-  // chart is stable across renders.
-  const heat = useMemo(() => {
-    return DAYS.map((day, di) => {
-      const hours = [];
-      for (let h = 0; h < 24; h++) {
-        const r = Math.sin((di * 31 + h) * 12.9898) * 43758.5453;
-        const v = r - Math.floor(r);
-        let lvl = 0;
-        const awake = h >= 9 && h <= 23;
-        if (awake) {
-          if (v > 0.4) lvl = 1;
-          if (v > 0.6) lvl = 2;
-          if (v > 0.78) lvl = 3;
-          if (v > 0.9) lvl = 4;
-        } else if (v > 0.85) lvl = 1;
-        hours.push(lvl);
-      }
-      return { day, hours };
-    });
-  }, []);
+  // Real 7×24 heatmap from the activity log; levels are normalized to the
+  // busiest cell in the window so the gradient adapts to each user's volume.
+  const { rows: heat, max: heatMax } = useMemo(() => getHeatmap(7), []);
 
   const xpTotal = mastered * 25;
   const xpForNext = 250 * Math.ceil((xpTotal + 1) / 250);
@@ -193,13 +172,22 @@ export default function DashboardScreen() {
           </div>
         </div>
         <div className="heatmap-week">
-          {heat.map(({ day, hours }) => (
-            <div className="heat-row" key={day}>
+          {heat.map(({ key, day, hours, levels }) => (
+            <div className="heat-row" key={key}>
               <span className="heat-day-label">{day}</span>
               <div className="heat-row-cells">
-                {hours.map((lvl, h) => (
-                  <div key={h} className="heat-cell" data-h={lvl || undefined} title={`${day} · ${h}:00`} />
-                ))}
+                {levels.map((lvl, h) => {
+                  const count = hours[h];
+                  const hourLabel = `${((h + 11) % 12) + 1}${h < 12 ? 'a' : 'p'}`;
+                  return (
+                    <div
+                      key={h}
+                      className="heat-cell"
+                      data-h={lvl || undefined}
+                      title={`${day} · ${hourLabel} · ${count} ${count === 1 ? 'review' : 'reviews'}`}
+                    />
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -214,6 +202,11 @@ export default function DashboardScreen() {
             </div>
           </div>
         </div>
+        {heatMax === 0 && (
+          <p style={{ marginTop: 12, fontSize: 13, color: 'var(--ink-soft)' }}>
+            No reviews yet — finish a few cards and they'll light up here.
+          </p>
+        )}
       </div>
 
       <div className="panel" style={{ marginTop: 20 }}>
