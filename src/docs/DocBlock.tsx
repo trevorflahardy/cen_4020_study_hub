@@ -13,6 +13,7 @@ import type {
 } from './types';
 
 /** Stable slug for an H2 heading or related-block anchor. */
+// eslint-disable-next-line react-refresh/only-export-components
 export function slugify(text: string): string {
   const base = text
     .toLowerCase()

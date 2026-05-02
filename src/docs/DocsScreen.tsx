@@ -15,6 +15,19 @@ export default function DocsScreen({ onOpenDeck }: DocsScreenProps): JSX.Element
   const active = useMemo(() => findPage(activeId) ?? findPage(DEFAULT_PAGE_ID), [activeId]);
   const filteredSections = useMemo(() => filterSections(SECTIONS, query), [query]);
 
+  // Reset scroll + clear any leftover TOC hash whenever the user picks a new
+  // page, so the article always starts at the top.
+  useEffect(() => {
+    if (window.location.hash) {
+      window.history.replaceState(
+        null,
+        '',
+        window.location.pathname + window.location.search,
+      );
+    }
+    window.scrollTo({ top: 0, left: 0 });
+  }, [activeId]);
+
   const page: DocPage | null = active?.page ?? null;
   if (!page) return <div className="page docs-page">Loading…</div>;
 
@@ -178,23 +191,61 @@ interface TocProps {
 function DocsToc({ page, onOpenDeck }: TocProps): JSX.Element {
   const headings = page.body.filter((b): b is H2Block => b.kind === 'h2');
   const relatedDeck = page.body.find((b) => b.kind === 'related');
+
+  const onAnchorClick = (e: MouseEvent<HTMLAnchorElement>, slug: string): void => {
+    e.preventDefault();
+    const target = document.getElementById(slug);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.history.replaceState(null, '', `#${slug}`);
+  };
+
+  const onOverviewClick = (e: MouseEvent<HTMLAnchorElement>): void => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    if (window.location.hash) {
+      window.history.replaceState(
+        null,
+        '',
+        window.location.pathname + window.location.search,
+      );
+    }
+  };
+
   return (
     <aside className="docs-toc">
       <div className="docs-toc-label">On this page</div>
       <ul>
         <li>
-          <a className="is-active" href="#">
+          <a className="is-active" href="#" onClick={onOverviewClick}>
             Overview
           </a>
         </li>
-        {headings.map((h, i) => (
-          <li key={i}>
-            <a href="#">{h.text}</a>
-          </li>
-        ))}
+        {headings.map((h, i) => {
+          const slug = slugify(h.text);
+          return (
+            <li key={i}>
+              <a
+                href={`#${slug}`}
+                onClick={(e) => {
+                  onAnchorClick(e, slug);
+                }}
+              >
+                {h.text}
+              </a>
+            </li>
+          );
+        })}
         {relatedDeck && (
           <li>
-            <a href="#">Practice deck</a>
+            <a
+              href={`#${PRACTICE_DECK_ID}`}
+              onClick={(e) => {
+                onAnchorClick(e, PRACTICE_DECK_ID);
+              }}
+            >
+              Practice deck
+            </a>
           </li>
         )}
       </ul>
