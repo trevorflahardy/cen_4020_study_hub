@@ -36,3 +36,4 @@ vite.config.*.timestamp-*
 .turbo
 coverage
 __pycache__
+.mypy_cache/*
