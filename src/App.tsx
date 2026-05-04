@@ -21,8 +21,11 @@ export default function App(): JSX.Element {
       if (e.key === 'Escape') setMenuOpen(false);
     };
     window.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     return () => {
       window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
     };
   }, [menuOpen]);
 

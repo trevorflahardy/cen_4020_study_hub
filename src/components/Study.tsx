@@ -70,33 +70,55 @@ export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.E
     [card],
   );
 
+  const submitMcq = useCallback((): void => {
+    if (card?.kind !== 'mcq') return;
+    const prev = mcqState?.picked;
+    if (card.multi) {
+      const picked = Array.isArray(prev) ? [...prev].sort((a, b) => a - b) : [];
+      if (picked.length === 0) return;
+      const ans = (Array.isArray(card.answer) ? card.answer : []).slice().sort((a, b) => a - b);
+      const correct = picked.length === ans.length && picked.every((v, i) => v === ans[i]);
+      setMcqState({ picked, correct, locked: true });
+    } else if (typeof prev === 'number') {
+      setMcqState({ picked: prev, correct: prev === card.answer, locked: true });
+    }
+  }, [card, mcqState]);
+
   useEffect(() => {
     function onKey(e: KeyboardEvent): void {
       const target = e.target;
-      if (target instanceof HTMLElement) {
-        if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return;
-      }
+      if (target instanceof HTMLElement && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return;
       if (!card) return;
-      if (e.code === 'Space') {
-        e.preventDefault();
-        if (card.kind === 'flip') setFlipped((f) => !f);
+      if (e.code === 'Escape') {
+        onExit();
+        return;
       }
-      const ready = flipped || mcqState !== null;
-      if (e.code === 'ArrowRight' && ready) advance('right', true);
-      if (e.code === 'ArrowLeft' && ready) advance('left', false);
-      if (e.code === 'ArrowDown' && ready) advance('left', false);
-      if (e.code === 'Escape') onExit();
+      if (e.code === 'Space' && card.kind === 'flip') {
+        e.preventDefault();
+        setFlipped((f) => !f);
+        return;
+      }
+      if (e.code === 'Enter' && card.kind === 'mcq' && !mcqState?.locked) {
+        e.preventDefault();
+        submitMcq();
+        return;
+      }
+      const ready = flipped || (mcqState?.locked ?? false);
+      if (!ready) return;
+      if (e.code === 'ArrowRight') advance('right', true);
+      else if (e.code === 'ArrowLeft' || e.code === 'ArrowDown') advance('left', false);
     }
     window.addEventListener('keydown', onKey);
     return () => {
       window.removeEventListener('keydown', onKey);
     };
-  }, [flipped, mcqState, advance, card, onExit]);
+  }, [flipped, mcqState, advance, card, onExit, submitMcq]);
 
   function onPointerDown(e: ReactPointerEvent<HTMLDivElement>): void {
     if (!card) return;
+    if (e.target instanceof Element && e.target.closest('button')) return;
     if (!flipped && card.kind === 'flip') return;
-    if (card.kind === 'mcq' && !mcqState) return;
+    if (card.kind === 'mcq' && !mcqState?.locked) return;
     dragRef.current = { x: e.clientX, y: e.clientY, active: true };
     cardRef.current?.setPointerCapture(e.pointerId);
   }
@@ -134,19 +156,8 @@ export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.E
       else set.add(i);
       setMcqState({ picked: [...set], correct: null, locked: false });
     } else {
-      const correct = i === card.answer;
-      setMcqState({ picked: i, correct, locked: true });
+      setMcqState({ picked: i, correct: null, locked: false });
     }
-  }
-
-  function submitMulti(): void {
-    if (card?.kind !== 'mcq' || !card.multi) return;
-    const prev = mcqState?.picked;
-    const picked = Array.isArray(prev) ? [...prev].sort() : [];
-    const ans = (Array.isArray(card.answer) ? card.answer : []).slice().sort();
-    const correct =
-      picked.length === ans.length && picked.every((v, i) => v === ans[i]);
-    setMcqState({ picked, correct, locked: true });
   }
 
   if (idx >= total) {
@@ -200,7 +211,7 @@ export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.E
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPickMcq={pickMcq}
-          onSubmitMulti={submitMulti}
+          onSubmitMcq={submitMcq}
         />
 
         {ready && !swipeDir && (

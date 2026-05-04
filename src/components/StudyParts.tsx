@@ -76,7 +76,7 @@ interface CardStageProps {
   onPointerMove: (e: ReactPointerEvent<HTMLDivElement>) => void;
   onPointerUp: (e: ReactPointerEvent<HTMLDivElement>) => void;
   onPickMcq: (i: number) => void;
-  onSubmitMulti: () => void;
+  onSubmitMcq: () => void;
 }
 
 export function CardStage({
@@ -94,7 +94,7 @@ export function CardStage({
   onPointerMove,
   onPointerUp,
   onPickMcq,
-  onSubmitMulti,
+  onSubmitMcq,
 }: CardStageProps): JSX.Element {
   return (
     <div className="card-stage">
@@ -121,7 +121,7 @@ export function CardStage({
             idx={idx}
             mcqState={mcqState}
             onPickMcq={onPickMcq}
-            onSubmitMulti={onSubmitMulti}
+            onSubmitMcq={onSubmitMcq}
           />
           <CardBack card={card} />
         </div>
@@ -140,7 +140,7 @@ interface CardFrontProps {
   idx: number;
   mcqState: McqState;
   onPickMcq: (i: number) => void;
-  onSubmitMulti: () => void;
+  onSubmitMcq: () => void;
 }
 
 function CardFront({
@@ -149,7 +149,7 @@ function CardFront({
   idx,
   mcqState,
   onPickMcq,
-  onSubmitMulti,
+  onSubmitMcq,
 }: CardFrontProps): JSX.Element {
   return (
     <div className="face front-face">
@@ -160,7 +160,7 @@ function CardFront({
       <p className="question">{renderInline(card.front)}</p>
 
       {card.kind === 'mcq' && (
-        <McqList card={card} mcqState={mcqState} onPick={onPickMcq} onSubmit={onSubmitMulti} />
+        <McqList card={card} mcqState={mcqState} onPick={onPickMcq} onSubmit={onSubmitMcq} />
       )}
 
       <div className="face-foot">
@@ -187,7 +187,11 @@ function FrontFootStatus({ card, mcqState }: FrontFootStatusProps): JSX.Element 
   if (mcqState?.locked) {
     return <span style={{ fontStyle: 'italic' }}>{renderInline(card.explain ?? '')}</span>;
   }
-  return <span>{card.multi ? 'Pick all that apply' : 'Pick an answer'}</span>;
+  return (
+    <span>
+      {card.multi ? 'Pick all that apply, then check' : 'Pick an answer, then check'}
+    </span>
+  );
 }
 
 interface McqListProps {
@@ -203,7 +207,9 @@ function McqList({ card, mcqState, onPick, onSubmit }: McqListProps): JSX.Elemen
   const correctSet = Array.isArray(card.answer)
     ? new Set(card.answer)
     : new Set([card.answer]);
-  const isMultiSubmittable = Array.isArray(picked) && picked.length > 0;
+  const hasPick = Array.isArray(picked)
+    ? picked.length > 0
+    : typeof picked === 'number';
   return (
     <div className="mcq-list">
       {card.options.map((opt, i) => {
@@ -231,15 +237,14 @@ function McqList({ card, mcqState, onPick, onSubmit }: McqListProps): JSX.Elemen
           </button>
         );
       })}
-      {card.multi && !locked && (
+      {!locked && (
         <button
-          className="btn btn-primary"
-          style={{ alignSelf: 'flex-start', marginTop: 4 }}
+          className="btn btn-primary mcq-check"
           onClick={(e) => {
             e.stopPropagation();
             onSubmit();
           }}
-          disabled={!isMultiSubmittable}
+          disabled={!hasPick}
         >
           Check answer
         </button>
