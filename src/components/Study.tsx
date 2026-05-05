@@ -1,14 +1,21 @@
 import {
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
   type JSX,
-  type PointerEvent as ReactPointerEvent,
 } from 'react';
 import { markCard } from '../lib/progress';
-import { buildSession } from '../lib/study';
+import {
+  applyRating,
+  clearSavedSession,
+  freshSession,
+  loadSession,
+  saveSession,
+  type ActiveSession,
+  type RateAction,
+} from '../lib/study';
+import { useCardSwipe, useStudyKeyboard } from '../lib/studyHooks';
 import { type McqState, type SessionCard } from '../types';
 import SessionComplete from './SessionComplete';
 import {
@@ -24,48 +31,48 @@ interface StudyScreenProps {
   onExit: () => void;
 }
 
-export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.Element {
-  const session = useMemo(() => buildSession(deckId), [deckId]);
-  const { deck, cards } = session;
-  const total = cards.length;
+const ADVANCE_MS = 380;
+const MCQ_AUTO_ADVANCE_MS = 750;
 
-  const [idx, setIdx] = useState(0);
+export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.Element {
+  const [session, setSession] = useState<ActiveSession>(() => loadSession(deckId));
+  const { deck, queue, pos, knew, missed, total } = session;
+
   const [flipped, setFlipped] = useState(false);
   const [swipeDir, setSwipeDir] = useState<SwipeDir>(null);
   const [hint, setHint] = useState<SwipeDir>(null);
   const [mcqState, setMcqState] = useState<McqState>(null);
   const [showXp, setShowXp] = useState(false);
-  const [knew, setKnew] = useState(0);
-  const [missed, setMissed] = useState(0);
-  const dragRef = useRef<{ x: number; y: number; active: boolean }>({
-    x: 0,
-    y: 0,
-    active: false,
-  });
   const cardRef = useRef<HTMLDivElement | null>(null);
+  const advancingRef = useRef(false);
 
-  const card: SessionCard | undefined = cards[idx];
-  const pct = total ? Math.round((idx / total) * 100) : 0;
+  const card: SessionCard | undefined = queue[pos]?.card;
+  const pct = total ? Math.min(100, Math.round((pos / total) * 100)) : 0;
 
   const advance = useCallback(
-    (dir: SwipeDir, knewIt: boolean) => {
+    (dir: SwipeDir, action: RateAction) => {
+      if (advancingRef.current || !card) return;
+      advancingRef.current = true;
       setSwipeDir(dir);
-      if (card) markCard(card._deck, card._idx, knewIt);
-      if (knewIt) {
-        setKnew((k) => k + 1);
+      markCard(card._deck, card._idx, action === 'good');
+      if (action === 'good') {
         setShowXp(true);
         setTimeout(() => {
           setShowXp(false);
         }, 900);
-      } else {
-        setMissed((m) => m + 1);
       }
       setTimeout(() => {
-        setIdx((i) => i + 1);
+        setSession((prev) => {
+          const next = applyRating(prev, action);
+          if (next.pos >= next.queue.length) clearSavedSession(next.deckId);
+          else saveSession(next);
+          return next;
+        });
         setFlipped(false);
         setMcqState(null);
         setSwipeDir(null);
-      }, 380);
+        advancingRef.current = false;
+      }, ADVANCE_MS);
     },
     [card],
   );
@@ -84,67 +91,21 @@ export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.E
     }
   }, [card, mcqState]);
 
+  // Auto-advance: a fully-correct MCQ counts as "got it" — celebrate, then move on.
   useEffect(() => {
-    function onKey(e: KeyboardEvent): void {
-      const target = e.target;
-      if (target instanceof HTMLElement && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) return;
-      if (!card) return;
-      if (e.code === 'Escape') {
-        onExit();
-        return;
-      }
-      if (e.code === 'Space' && card.kind === 'flip') {
-        e.preventDefault();
-        setFlipped((f) => !f);
-        return;
-      }
-      if (e.code === 'Enter' && card.kind === 'mcq' && !mcqState?.locked) {
-        e.preventDefault();
-        submitMcq();
-        return;
-      }
-      const ready = flipped || (mcqState?.locked ?? false);
-      if (!ready) return;
-      if (e.code === 'ArrowRight') advance('right', true);
-      else if (e.code === 'ArrowLeft' || e.code === 'ArrowDown') advance('left', false);
-    }
-    window.addEventListener('keydown', onKey);
+    if (card?.kind !== 'mcq') return;
+    if (!mcqState?.locked || mcqState.correct !== true) return;
+    const t = setTimeout(() => {
+      advance('right', 'good');
+    }, MCQ_AUTO_ADVANCE_MS);
     return () => {
-      window.removeEventListener('keydown', onKey);
+      clearTimeout(t);
     };
-  }, [flipped, mcqState, advance, card, onExit, submitMcq]);
+  }, [mcqState, card, advance]);
 
-  function onPointerDown(e: ReactPointerEvent<HTMLDivElement>): void {
-    if (!card) return;
-    if (e.target instanceof Element && e.target.closest('button')) return;
-    if (!flipped && card.kind === 'flip') return;
-    if (card.kind === 'mcq' && !mcqState?.locked) return;
-    dragRef.current = { x: e.clientX, y: e.clientY, active: true };
-    cardRef.current?.setPointerCapture(e.pointerId);
-  }
-  function onPointerMove(e: ReactPointerEvent<HTMLDivElement>): void {
-    if (!dragRef.current.active) return;
-    const dx = e.clientX - dragRef.current.x;
-    if (cardRef.current) {
-      cardRef.current.style.transition = 'none';
-      cardRef.current.style.transform = `${flipped ? 'rotateY(180deg) ' : ''}translateX(${dx}px) rotate(${dx * 0.05}deg)`;
-    }
-    if (dx > 60) setHint('right');
-    else if (dx < -60) setHint('left');
-    else setHint(null);
-  }
-  function onPointerUp(_e: ReactPointerEvent<HTMLDivElement>): void {
-    if (!dragRef.current.active) return;
-    const dx = _e.clientX - dragRef.current.x;
-    dragRef.current.active = false;
-    if (cardRef.current) {
-      cardRef.current.style.transition = '';
-      cardRef.current.style.transform = '';
-    }
-    setHint(null);
-    if (dx > 110) advance('right', true);
-    else if (dx < -110) advance('left', false);
-  }
+  useStudyKeyboard({ card, flipped, mcqState, onExit, setFlipped, submitMcq, advance });
+
+  const swipe = useCardSwipe({ card, flipped, mcqState, cardRef, setHint, advance });
 
   function pickMcq(i: number): void {
     if (mcqState?.locked || card?.kind !== 'mcq') return;
@@ -160,24 +121,32 @@ export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.E
     }
   }
 
-  if (idx >= total) {
+  function restart(): void {
+    clearSavedSession(deckId);
+    setSession(freshSession(deckId));
+    setFlipped(false);
+    setMcqState(null);
+    setSwipeDir(null);
+    setHint(null);
+    setShowXp(false);
+  }
+
+  if (pos >= queue.length) {
     return (
       <SessionComplete
         knew={knew}
         missed={missed}
         deck={deck}
         onExit={onExit}
-        onRestart={() => {
-          setIdx(0);
-          setKnew(0);
-          setMissed(0);
-        }}
+        onRestart={restart}
       />
     );
   }
   if (!card) return <></>;
 
+  const mcqAutoAdvancing = card.kind === 'mcq' && mcqState?.correct === true;
   const ready = card.kind === 'flip' ? flipped : (mcqState?.locked ?? false);
+  const showRateRow = ready && !swipeDir && !mcqAutoAdvancing;
   const onCardClick = (): void => {
     if (card.kind === 'flip' && !swipeDir) setFlipped((f) => !f);
   };
@@ -187,7 +156,7 @@ export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.E
       <div className="study">
         <StudyTop
           deck={deck}
-          idx={idx}
+          idx={pos}
           total={total}
           knew={knew}
           missed={missed}
@@ -199,7 +168,7 @@ export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.E
         <CardStage
           card={card}
           deck={deck}
-          idx={idx}
+          idx={pos}
           flipped={flipped}
           swipeDir={swipeDir}
           hint={hint}
@@ -207,20 +176,23 @@ export default function StudyScreen({ deckId, onExit }: StudyScreenProps): JSX.E
           mcqState={mcqState}
           cardRef={cardRef}
           onCardClick={onCardClick}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
+          onPointerDown={swipe.onPointerDown}
+          onPointerMove={swipe.onPointerMove}
+          onPointerUp={swipe.onPointerUp}
           onPickMcq={pickMcq}
           onSubmitMcq={submitMcq}
         />
 
-        {ready && !swipeDir && (
+        {showRateRow && (
           <RateRow
-            onMiss={() => {
-              advance('left', false);
+            onAgain={() => {
+              advance('left', 'again');
             }}
-            onGotIt={() => {
-              advance('right', true);
+            onHard={() => {
+              advance('left', 'hard');
+            }}
+            onGood={() => {
+              advance('right', 'good');
             }}
           />
         )}

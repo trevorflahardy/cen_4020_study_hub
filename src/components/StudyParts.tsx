@@ -283,24 +283,25 @@ function CardBack({ card }: { card: SessionCard }): JSX.Element {
 }
 
 interface RateRowProps {
-  onMiss: () => void;
-  onGotIt: () => void;
+  onAgain: () => void;
+  onHard: () => void;
+  onGood: () => void;
 }
 
-export function RateRow({ onMiss, onGotIt }: RateRowProps): JSX.Element {
+export function RateRow({ onAgain, onHard, onGood }: RateRowProps): JSX.Element {
   return (
     <div className="rate-row">
-      <button className="rate-btn again" onClick={onMiss}>
+      <button className="rate-btn again" onClick={onAgain}>
         <span className="emoji">😬</span>
         <span>Again</span>
         <span className="key">←</span>
       </button>
-      <button className="rate-btn hard" onClick={onMiss}>
+      <button className="rate-btn hard" onClick={onHard}>
         <span className="emoji">🤔</span>
         <span>Hard</span>
         <span className="key">↓</span>
       </button>
-      <button className="rate-btn good" onClick={onGotIt}>
+      <button className="rate-btn good" onClick={onGood}>
         <span className="emoji">🎉</span>
         <span>Got it!</span>
         <span className="key">→</span>
